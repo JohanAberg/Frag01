@@ -22,11 +22,13 @@ import java.util.ArrayList;
 public class MySimpleArrayAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final ArrayList<String> values;
+    public ImageLoader imageLoader;
 
     public MySimpleArrayAdapter(Context context, ArrayList<String> values) {
         super(context, R.layout.shots_main, values);
         this.context = context;
         this.values = values;
+        imageLoader=new ImageLoader(context);
     }
 
     public class DownloadImagesTask extends AsyncTask<ImageView, Void, Bitmap> {
@@ -65,21 +67,51 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
         }
     }
 
+    static class ViewHolder {
+        public TextView text;
+        public ImageView image;
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.shots_main, parent, false);
-        TextView textView = (TextView) rowView.findViewById(R.id.textView6);
-        ImageView imageView = (ImageView) rowView.findViewById(R.id.imageView);
+//        LayoutInflater inflater = (LayoutInflater) context
+//                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View rowView = convertView;
+        ViewHolder viewHolder;
+//        rowView = inflater.inflate(R.layout.shots_main, parent, false);
 
-        String URL = "https://www.google.co.nz/images/srpr/logo11w.png";
+        if (rowView == null) {
+            LayoutInflater inflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            rowView = inflater.inflate(R.layout.shots_main, parent, false);
+
+            // configure view holder
+            viewHolder = new ViewHolder();
+            viewHolder.text = (TextView) rowView.findViewById(R.id.textView6);
+            viewHolder.image = (ImageView) rowView.findViewById(R.id.imageView);
+            rowView.setTag(viewHolder);
+        }else{
+            viewHolder = (ViewHolder) rowView.getTag();
+        }
+
+//        String URL = "https://www.google.co.nz/images/srpr/logo11w.png";
+//        String URL = "http://img.photobucket.com/albums/v58/PixelMagic/Blog%20Images/vfx_tip_2_lightwrap.jpg";
+//        String URL = "http://www.artofvfx.com/TRONLEGACY/TRONLEGACY_OLLIN_VFX_03B.jpg";
+        String URL = "http://artofvfx.com/wp-content/uploads/2011/03/BLA_SPIN_VFX_03A.jpg";
+        viewHolder.image.setTag(URL);
+//        new DownloadImagesTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, viewHolder.image);
+        imageLoader.DisplayImage(URL, viewHolder.image);
+        viewHolder.text.setText(values.get(position));
+
+//        rowView = inflater.inflate(R.layout.shots_main, parent, false);
+
+//        TextView textView = (TextView) rowView.findViewById(R.id.textView6);
+//        ImageView imageView = (ImageView) rowView.findViewById(R.id.imageView);
+
+
 //        String URL = "http://www.cinemablend.com/images/news/36006/_1361891471.jpg";
 //        String URL = "http://motionographer.com/wp-content/uploads/2009/07/vfx-for-directors.jpg";
 
-        imageView.setTag(URL);
-        new DownloadImagesTask().execute(imageView);
-        textView.setText(values.get(position));
 
 
 
