@@ -10,10 +10,11 @@
 
     <ImageView
         android:layout_width="128dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/imageView"
         android:layout_marginRight="8dp"
-        android:src="@drawable/green" />
+        android:src="@drawable/green"
+        android:layout_gravity="top" />
 
     <TableLayout
         android:layout_width="wrap_content"
