@@ -9,14 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-
 import java.util.ArrayList;
-
-import nz.co.aberg.frag01.app.dummy.DummyContent;
 
 /**
  * A fragment representing a list of Items.
@@ -27,7 +23,7 @@ import nz.co.aberg.frag01.app.dummy.DummyContent;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class ItemFragment extends Fragment implements AbsListView.OnItemClickListener {
+public class PlaylistFragment extends Fragment implements AbsListView.OnItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,8 +54,8 @@ public class ItemFragment extends Fragment implements AbsListView.OnItemClickLis
     private ListAdapter mAdapter;
 
     // TODO: Rename and change types of parameters
-    public static ItemFragment newInstance(String param1, String param2) {
-        ItemFragment fragment = new ItemFragment();
+    public static PlaylistFragment newInstance(String param1, String param2) {
+        PlaylistFragment fragment = new PlaylistFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -71,7 +67,7 @@ public class ItemFragment extends Fragment implements AbsListView.OnItemClickLis
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ItemFragment() {
+    public PlaylistFragment() {
     }
 
     @Override
